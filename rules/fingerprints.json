@@ -1,0 +1,32 @@
+{
+  "rules": [
+    {"name":"openssh","pattern":"(?im)^SSH-[0-9.]+-OpenSSH[_-](?P<version>[0-9][0-9A-Za-z.p]*)","protocol":"SSH","product":"OpenSSH","confidence":0.95},
+    {"name":"dropbear","pattern":"(?im)^SSH-[0-9.]+-dropbear[_-](?P<version>[0-9.]+)","protocol":"SSH","product":"Dropbear","confidence":0.95},
+    {"name":"ssh-generic","pattern":"(?m)^SSH-[0-9.]+-[^\\r\\n]+","protocol":"SSH","product":"","confidence":0.8},
+    {"name":"http-nginx","pattern":"(?im)^Server:[ \\t]*nginx(?:/(?P<version>[0-9][0-9A-Za-z._-]*))?(?:[ \\t\\r\\n]|$)","protocol":"HTTP","product":"nginx","confidence":0.9},
+    {"name":"http-apache","pattern":"(?im)^Server:[ \\t]*Apache(?:/(?P<version>[0-9][0-9A-Za-z._-]*))?(?:[ \\t\\r\\n]|$)","protocol":"HTTP","product":"Apache","confidence":0.9},
+    {"name":"http-jetty","pattern":"(?im)^Server:[ \\t]*Jetty(?:[/ (](?P<version>[0-9]+(?:\\.[0-9]+)*))?","protocol":"HTTP","product":"Jetty","confidence":0.85},
+    {"name":"http-iis","pattern":"(?im)^Server:[ \\t]*Microsoft-IIS(?:/(?P<version>[0-9.]+))?","protocol":"HTTP","product":"Microsoft-IIS","confidence":0.9},
+    {"name":"http-caddy","pattern":"(?im)^Server:[ \\t]*Caddy(?:/(?P<version>[0-9.]+))?","protocol":"HTTP","product":"Caddy","confidence":0.9},
+    {"name":"http-generic","pattern":"(?m)^HTTP/[0-9.]+[ \\t]+[0-9]{3}(?:[ \\t\\r\\n]|$)","protocol":"HTTP","product":"","confidence":0.8},
+    {"name":"mariadb-handshake","pattern":"(?s)^(?:[\\x00-\\xff]{4})?\\x0a(?P<version>[0-9][0-9A-Za-z._+~-]*MariaDB[^\\x00]*)\\x00","protocol":"MySQL","product":"MariaDB","confidence":0.95},
+    {"name":"mysql-handshake","pattern":"(?s)^(?:[\\x00-\\xff]{4})?\\x0a(?P<version>[0-9]+(?:\\.[0-9]+){1,3})(?:[^\\x00]*)\\x00","protocol":"MySQL","product":"MySQL","confidence":0.9},
+    {"name":"redis-info","pattern":"(?im)^redis_version:(?P<version>[0-9.]+)","protocol":"Redis","product":"Redis","confidence":0.95},
+    {"name":"redis-auth","pattern":"(?i)^-(?:NOAUTH Authentication required\\.?|DENIED Redis is running|WRONGPASS invalid username-password)","protocol":"Redis","product":"Redis","confidence":0.85},
+    {"name":"redis-error","pattern":"(?i)^-ERR (?:wrong number of arguments for '[^']+' command|unknown command|unknown subcommand)","protocol":"Redis","product":"Redis","confidence":0.7},
+    {"name":"redis-pong","pattern":"^\\+PONG(?:\\r?\\n)?$","protocol":"Redis","product":"Redis","confidence":0.7},
+    {"name":"ftp-proftpd","pattern":"(?im)^220[ -].*?ProFTPD(?:[ /](?P<version>[0-9][0-9A-Za-z.]*))?","protocol":"FTP","product":"ProFTPD","confidence":0.9},
+    {"name":"ftp-vsftpd","pattern":"(?im)^220[ -].*?vsFTPd(?:[ /](?P<version>[0-9][0-9A-Za-z.]*))?","protocol":"FTP","product":"vsFTPd","confidence":0.9},
+    {"name":"ftp-pureftpd","pattern":"(?im)^220[ -].*?Pure-FTPd(?:[ /](?P<version>[0-9][0-9A-Za-z.]*))?","protocol":"FTP","product":"Pure-FTPd","confidence":0.9},
+    {"name":"ftp-filezilla","pattern":"(?im)^220[ -].*?FileZilla Server(?:[ /](?P<version>[0-9.]+))?","protocol":"FTP","product":"FileZilla Server","confidence":0.9},
+    {"name":"ftp-generic","pattern":"(?im)^220[ -].*\\bFTP\\b","protocol":"FTP","product":"","confidence":0.7},
+    {"name":"tls-record","pattern":"(?s)^[\\x14-\\x17]\\x03[\\x00-\\x04][\\x00-\\xff]{2}.","protocol":"TLS","product":"","confidence":0.75}
+  ],
+  "os_rules": [
+    {"pattern":"(?i)\\bUbuntu\\b","hint":"Ubuntu"},
+    {"pattern":"(?i)\\bDebian\\b","hint":"Debian"},
+    {"pattern":"(?i)\\bCentOS\\b","hint":"CentOS"},
+    {"pattern":"(?i)\\bFreeBSD\\b","hint":"FreeBSD"},
+    {"pattern":"(?i)Microsoft-IIS|\\bWindows\\b","hint":"Windows"}
+  ]
+}

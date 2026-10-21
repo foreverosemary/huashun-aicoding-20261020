@@ -1,0 +1,6 @@
+.git
+.github
+bin
+*.exe
+coverage.out
+.gocache
